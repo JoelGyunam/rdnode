@@ -1,6 +1,11 @@
-import "@/styles/globals.css";
+import Axios from 'axios';
+import '../styles/globals.css'
 import type { AppProps } from "next/app";
+import { AuthProvider } from '../src/context/auth';
 
 export default function App({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />;
+  Axios.defaults.baseURL = process.env.NEXT_PUBLIC_SERVER_BASE_URL + "/api";
+  return <AuthProvider>
+      <Component {...pageProps} />;
+    </AuthProvider>
 }
